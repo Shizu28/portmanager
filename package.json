@@ -1,0 +1,31 @@
+{
+  "name": "portmanager",
+  "version": "1.0.0",
+  "description": "Desktop Port Manager",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.portmanager",
+    "productName": "Port Manager",
+    "files": [
+      "**/*",
+      "!sea-config.json",
+      "!sea-prep.blob",
+      "!create-icon.js",
+      "!pm.exe",
+      "!dist/**"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "assets/icon.ico"
+    },
+    "asar": false
+  },
+  "devDependencies": {
+    "electron": "^41.3.0",
+    "electron-builder": "^26.8.1"
+  }
+}
