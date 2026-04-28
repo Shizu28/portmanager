@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+sea-prep.blob
+
+# Electron builder cache
+dist/builder-effective-config.yaml
