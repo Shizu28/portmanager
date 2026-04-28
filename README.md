@@ -1,28 +1,53 @@
 # Port Manager
 
-Ein minimaler lokaler Web-Dashboard zum Überwachen und Verwalten aktiver TCP-Ports auf Windows.
+Ein minimaler lokaler Dashboard zum Überwachen und Verwalten aktiver TCP-Ports auf Windows — als native Desktop-App.
 
-## Start
+## Download
+
+Einfach `dist\Port Manager 1.0.0.exe` herunterladen und starten — kein Node.js, kein Install nötig.
+
+## Selbst bauen
 
 ```bash
-node pm.js
+npm install
+npm run build
 ```
 
-Danach im Browser öffnen: [http://localhost:3099](http://localhost:3099)
+Die fertige `.exe` landet in `dist/`.
+
+> Beim ersten Build wird `$env:CSC_IDENTITY_AUTO_DISCOVERY='false'` benötigt um Code-Signing zu überspringen:
+> ```powershell
+> $env:CSC_IDENTITY_AUTO_DISCOVERY='false'; npm run build
+> ```
+
+## Entwicklung (ohne Build)
+
+```bash
+npm install
+npm start
+```
+
+Oder nur den HTTP-Server starten:
+```bash
+node pm.js
+# → http://localhost:3099
+```
 
 ## Features
 
 - **Ports anzeigen** – listet alle lauschenden TCP-Ports mit PID und Prozessname
-- **Kill** – beendet einen Prozess per PID (Stop-Process -Force)
-- **Restart** – killt den Prozess auf dem Port und startet automatisch `server.js` / `index.js` / `app.js` neu (sucht im selben Verzeichnis)
-- **Öffnen** – öffnet `http://localhost:<port>` direkt im Browser
-- **Auto-Refresh** – aktualisiert die Liste alle 8 Sekunden automatisch
+- **Kill** – beendet einen Prozess per PID
+- **Restart** – killt den Prozess und startet `server.js` / `index.js` / `app.js` neu
+- **Öffnen** – öffnet `http://localhost:<port>` im Browser
+- **Auto-Refresh** – aktualisiert die Liste alle 8 Sekunden
+- **Tray-Icon** – läuft im Hintergrund, Klick öffnet das Fenster
 
 ## Voraussetzungen
 
 - Windows (nutzt PowerShell `Get-NetTCPConnection`)
-- Node.js (kein npm install nötig – nur Standardmodule)
+- Node.js nur zum Selberbauen nötig
 
 ## Port
 
-Der Manager läuft selbst auf Port `3099` (änderbar über `PM_PORT` in `pm.js`).
+Der interne HTTP-Server läuft auf Port `3099` (änderbar über `PM_PORT` in `pm.js`).
+
